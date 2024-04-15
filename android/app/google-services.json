@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058772504897",
+    "project_id": "educast-8d2e7",
+    "storage_bucket": "educast-8d2e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058772504897:android:337b89742983b17aff51c0",
+        "android_client_info": {
+          "package_name": "com.example.educast"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVQijBctM0r40QT8kZyWSm0a37UL7gd_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

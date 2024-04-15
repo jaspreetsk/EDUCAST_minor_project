@@ -1,0 +1,78 @@
+import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
+import 'package:educast/features/user_auth/presentation/pages/login_page.dart';
+import 'package:educast/features/user_auth/presentation/pages/student_join_page.dart';
+import 'package:educast/pallet.dart';
+import 'package:educast/wigets/app_bar.dart';
+import 'package:educast/features/user_auth/presentation/pages/button_icon_student_page.dart';
+import 'package:educast/wigets/gradient_button.dart';
+import 'package:educast/wigets/text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class StudentHomePage extends StatelessWidget {
+  final TextEditingController sessionIDcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
+  StudentHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(title: 'Join Session'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding:EdgeInsets.only(
+            top: 50,
+            left: 30,
+            right: 30,
+          ) ,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Session Id',
+              style: TextStyle(
+                fontSize: 18,
+                color: Pallete.textcolor,
+                fontWeight: FontWeight.bold,
+              ),
+              ),
+              const SizedBox(height: 10,),
+              TextFieldArea(
+                textFieldController: sessionIDcontroller,
+              ),
+              const SizedBox(height: 15,),
+              const Text('Password',
+              style: TextStyle(
+                fontSize: 18,
+                color: Pallete.textcolor,
+                fontWeight: FontWeight.bold,
+              ),
+              ),
+              const SizedBox(height: 10,),
+              TextFieldArea(
+                textFieldController: passwordcontroller,
+              ),
+              const SizedBox(height: 20,),
+
+              Center(child: GradientButton(title: 'Join', ontap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  return ButtonIconStudentPage(); //studenthomepage() to ButtonIconStudentPage
+                }));
+              })),
+              const SizedBox(height: 15,),
+              Center(
+                child: GradientButton(title: 'Logout', ontap: ()async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('isLoggedIn', false);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                    return HomePage();
+                  }));
+                }),
+              )
+            ],
+          ),
+        
+          ),
+      ),
+    );
+  }
+}
