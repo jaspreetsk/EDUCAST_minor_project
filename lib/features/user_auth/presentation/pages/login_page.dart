@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,9 +23,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+
+
+
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+
   void loginUser() async {
+
     FirebaseAuthMethods().loginWithEmail(
         email: emailcontroller.text,
         password: passwordcontroller.text,
@@ -37,7 +43,7 @@ class LoginPageState extends State<LoginPage> {
     final emailTeacher = await emailAlreadyExistsTeacher(emailcontroller.text);
     if (emailStudent == true) {
       await prefs.setString('userType', 'student');
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
             return ButtonIconStudentPage();
@@ -46,7 +52,7 @@ class LoginPageState extends State<LoginPage> {
       );
     } else if (emailTeacher == true) {
       await prefs.setString('userType', 'teacher');
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
             return ButtonIconTeacherPage();
@@ -57,6 +63,8 @@ class LoginPageState extends State<LoginPage> {
       showSnackBar(context, 'Email not found!!');
     }
   }
+
+   
 
   // Checking if email exists in student collection
   Future<bool> emailAlreadyExistsStudent(String email) async {

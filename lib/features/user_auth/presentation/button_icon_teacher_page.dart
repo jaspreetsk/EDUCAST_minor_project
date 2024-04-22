@@ -1,7 +1,11 @@
+import 'package:educast/features/user_auth/presentation/pages/history_meeting_screen.dart';
+import 'package:educast/features/user_auth/presentation/pages/create_new_meeting_screen_teacher.dart';
 import 'package:educast/features/user_auth/presentation/pages/teacher_home_page.dart';
 import 'package:educast/pallet.dart';
 import 'package:educast/wigets/buttons_icons.dart';
+import 'package:educast/wigets/text_field.dart';
 import 'package:flutter/material.dart';
+
 
 class ButtonIconTeacherPage extends StatefulWidget {
   const ButtonIconTeacherPage({super.key});
@@ -18,6 +22,13 @@ class _ButtonIconTeacherPageState extends State<ButtonIconTeacherPage> {
     });
   }
 
+List<Widget> pages = [
+  MeetingScreen(icon: Icons.videocam, text: 'Create new meeting',),
+  const HistoryMeetingScreen(),
+  const Text('Contacts'),
+  const Text('Settings'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,24 +42,7 @@ class _ButtonIconTeacherPageState extends State<ButtonIconTeacherPage> {
         backgroundColor: Pallete.backgroundColor,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ButtonIcon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return TeacherHomePage();
-                    },
-                  ),
-                );
-              },
-              icon: Icons.videocam,
-              text: 'Create New Meeting',
-            ),
-          ],
-        ),
+        child: pages[_page],
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -89,3 +83,4 @@ class _ButtonIconTeacherPageState extends State<ButtonIconTeacherPage> {
     );
   }
 }
+

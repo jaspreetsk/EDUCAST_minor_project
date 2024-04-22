@@ -1,8 +1,9 @@
 import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
 import 'package:educast/features/user_auth/presentation/pages/login_page.dart';
-
+import 'dart:math';
 import 'package:educast/features/user_auth/presentation/pages/teacher_join_page.dart';
 import 'package:educast/pallet.dart';
+// import 'package:educast/resources/jitsi_meet_methods.dart';
 import 'package:educast/wigets/app_bar.dart';
 import 'package:educast/wigets/gradient_button.dart';
 import 'package:educast/wigets/text_field.dart';
@@ -13,6 +14,8 @@ class TeacherHomePage extends StatelessWidget {
   final TextEditingController sessionIDcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   TeacherHomePage({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class TeacherHomePage extends StatelessWidget {
                             .push(MaterialPageRoute(builder: (context) {
                           return TeacherJoinPage();
                         }));
-                      })),
+  })),
               const SizedBox(
                 height: 15,
               ),

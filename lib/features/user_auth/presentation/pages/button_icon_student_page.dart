@@ -1,3 +1,5 @@
+import 'package:educast/features/user_auth/presentation/pages/history_meeting_screen.dart';
+import 'package:educast/features/user_auth/presentation/pages/create_new_meeting_screen_teacher.dart';
 import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
 import 'package:educast/pallet.dart';
 import 'package:educast/wigets/buttons_icons.dart';
@@ -18,6 +20,13 @@ class _ButtonIconStudentPageState extends State<ButtonIconStudentPage> {
     });
   }
 
+  List<Widget> pages = [
+     MeetingScreen(text: 'Join the meeting', icon: Icons.meeting_room,),
+    const HistoryMeetingScreen(),
+    const Text('Contacts'),
+    const Text('Settings'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,24 +40,7 @@ class _ButtonIconStudentPageState extends State<ButtonIconStudentPage> {
         backgroundColor: Pallete.backgroundColor,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ButtonIcon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return StudentHomePage();
-                    },
-                  ),
-                );
-              },
-              icon: Icons.add_box_rounded,
-              text: 'Join New Meeting',
-            )
-          ],
-        ),
+        child: pages[_page],
       ),
       bottomNavigationBar: BottomNavigationBar(
         //backgroundColor: Pallete.textcolor,
