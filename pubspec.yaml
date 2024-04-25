@@ -47,6 +47,7 @@ dependencies:
   gettext: ^1.2.0
   shared_preferences: ^2.2.3
   jitsi_meet_flutter_sdk: ^0.4.1
+  firebase_analytics: ^10.10.4
   
   
 
