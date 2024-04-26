@@ -3,6 +3,7 @@ import 'package:educast/features/user_auth/presentation/pages/create_new_meeting
 import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
 import 'package:educast/pallet.dart';
 import 'package:educast/wigets/buttons_icons.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 class ButtonIconStudentPage extends StatefulWidget {
@@ -13,11 +14,24 @@ class ButtonIconStudentPage extends StatefulWidget {
 }
 
 class _ButtonIconStudentPageState extends State<ButtonIconStudentPage> {
+  final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
+  static List pageName =['Meet & Chat','Meetings','Contacts','Settings'];
   int _page = 0;
-  onPageChanged(int page) {
+  onPageChanged(int page) async {
+    await analytics_instance.logEvent(
+      name: 'Bottom_navigator',
+      parameters: {
+        "page_name": pageName[page],
+        "page_index": page, }
+      );
     setState(() {
       _page = page;
     });
+  }
+  @override
+  void initState(){
+    analytics_instance.setAnalyticsCollectionEnabled(true);
+    super.initState();
   }
 
   List<Widget> pages = [
