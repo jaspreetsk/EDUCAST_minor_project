@@ -1,6 +1,6 @@
 import 'package:educast/features/user_auth/presentation/button_icon_teacher_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/teacher_home_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 import 'package:educast/firebase_auth/auth.dart';
 import 'package:educast/firebase_auth/show_snack_bar.dart';
 import 'package:educast/features/user_auth/presentation/pages/button_icon_student_page.dart';
@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,10 +24,11 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
 
-
+  final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
 
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+   
 
   void loginUser() async {
 
@@ -35,6 +36,8 @@ class LoginPageState extends State<LoginPage> {
         email: emailcontroller.text,
         password: passwordcontroller.text,
         context: context);
+        
+        
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         

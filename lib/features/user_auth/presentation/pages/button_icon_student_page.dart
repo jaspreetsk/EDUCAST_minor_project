@@ -1,8 +1,8 @@
 import 'package:educast/features/user_auth/presentation/pages/history_meeting_screen.dart';
 import 'package:educast/features/user_auth/presentation/pages/create_new_meeting_screen_teacher.dart';
-import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
+
 import 'package:educast/pallet.dart';
-import 'package:educast/wigets/buttons_icons.dart';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _ButtonIconStudentPageState extends State<ButtonIconStudentPage> {
   static List pageName =['Meet & Chat','Meetings','Contacts','Settings'];
   int _page = 0;
   onPageChanged(int page) async {
-    await analytics_instance.logEvent(
+   await analytics_instance.logEvent(
       name: 'Bottom_navigator',
       parameters: {
         "page_name": pageName[page],

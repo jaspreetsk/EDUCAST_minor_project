@@ -6,6 +6,7 @@ import 'package:educast/wigets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class MeetingScreen extends StatefulWidget {
   final String text;
@@ -17,8 +18,19 @@ class MeetingScreen extends StatefulWidget {
 }
 
 class _MeetingScreenState extends State<MeetingScreen> {
+  final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
+  
+  @override
+  void initState() {
+    analytics_instance.setAnalyticsCollectionEnabled(true);
+    super.initState();
+  }
+
   final jitsiMeet = JitsiMeet();
-  void join() {
+  void join()async {
+    await analytics_instance
+                .logEvent(name: 'jayain'
+                );
     var options = JitsiMeetConferenceOptions(
       serverURL: "https://meet.jit.si",
       room: "test0987test",
@@ -42,7 +54,8 @@ class _MeetingScreenState extends State<MeetingScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ButtonIcon(
-          onPressed: () {
+          onPressed: ()  {
+            
             join();
             // Navigator.of(context).push(
             //   MaterialPageRoute(
@@ -52,22 +65,22 @@ class _MeetingScreenState extends State<MeetingScreen> {
             //   ),
             // );
           },
-          icon:widget.icon,
-          text:widget.text,
+          icon: widget.icon,
+          text: widget.text,
         ),
         SizedBox(height: 20),
         Center(
-                child: GradientButton(
-                    title: 'Logout',
-                    ontap: () async {
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setBool('isLoggedIn', false);
-                      Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) {
-                        return HomePage();
-                      }));
-                    }),
-              )
+          child: GradientButton(
+              title: 'Logout',
+              ontap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isLoggedIn', false);
+                Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
+                  return HomePage();
+                }));
+              }),
+        )
       ],
     );
   }

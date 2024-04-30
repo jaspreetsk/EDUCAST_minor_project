@@ -11,7 +11,7 @@ import 'package:educast/wigets/gradient_button.dart';
 import 'package:educast/wigets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:educast/model.dart';
+
 
 class CreateAccount extends StatefulWidget {
   CreateAccount({super.key});
