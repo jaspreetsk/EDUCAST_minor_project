@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -23,24 +22,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-
   final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
 
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
-   
 
   void loginUser() async {
-
     FirebaseAuthMethods().loginWithEmail(
         email: emailcontroller.text,
         password: passwordcontroller.text,
         context: context);
-        
-        
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('isLoggedIn', true);
-        
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', true);
 
     final emailStudent = await emailAlreadyExistsStudent(emailcontroller.text);
     final emailTeacher = await emailAlreadyExistsTeacher(emailcontroller.text);
@@ -65,9 +59,14 @@ class LoginPageState extends State<LoginPage> {
     } else {
       showSnackBar(context, 'Email not found!!');
     }
-  }
 
-   
+    // Code to add user-ID in google firebase analytics.We are using email as a
+    // userID and sending it to google analytics.
+
+    await FirebaseAnalytics.instance.setUserId(id: emailcontroller.text);
+    //print('////////////////////////////////////////////${emailcontroller.text}');
+
+  }
 
   // Checking if email exists in student collection
   Future<bool> emailAlreadyExistsStudent(String email) async {
@@ -92,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
     return QuerySnapshot.docs.isNotEmpty;
   }
 
-  // Forgot password 
+  // Forgot password
   Future<void> resetPassword() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     String email = emailcontroller.text;
@@ -103,11 +102,13 @@ class LoginPageState extends State<LoginPage> {
       });
     } catch (e) {
       setState(() {
-        showSnackBar(context, 'Failed to send password reset email. Please try again.');
+        showSnackBar(
+            context, 'Failed to send password reset email. Please try again.');
       });
       print('Error sending password reset email: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,11 +159,11 @@ class LoginPageState extends State<LoginPage> {
               ),
               CustomTextButton(
                   ontap: resetPassword,
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (context) {
-                    //   return const ForgotPassword();
-                    // }));
-                  
+                  // Navigator.of(context)
+                  //     .push(MaterialPageRoute(builder: (context) {
+                  //   return const ForgotPassword();
+                  // }));
+
                   title: 'Forgot Password?'),
               const SizedBox(
                 height: 10,
