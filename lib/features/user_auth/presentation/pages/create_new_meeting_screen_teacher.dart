@@ -1,4 +1,5 @@
 import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
+import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
 import 'package:educast/features/user_auth/presentation/pages/teacher_home_page.dart';
 // import 'package:educast/resources/jitsi_meet_methods.dart';
 import 'package:educast/wigets/buttons_icons.dart';
@@ -18,22 +19,22 @@ class MeetingScreen extends StatefulWidget {
 }
 
 class _MeetingScreenState extends State<MeetingScreen> {
+  // Initialize when the user exits the meeting
   final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
-  
+
   @override
   void initState() {
     analytics_instance.setAnalyticsCollectionEnabled(true);
+    // JitsiMeetEventListener();
     super.initState();
   }
 
   final jitsiMeet = JitsiMeet();
-  void join()async {
-    await analytics_instance
-                .logEvent(name: 'jayain'
-                );
+  void join() async {
+   
     var options = JitsiMeetConferenceOptions(
       serverURL: "https://meet.jit.si",
-      room: "test0987test",
+      room: "123458769087",
       configOverrides: {
         "startWithAudioMuted": true,
         "startWithVideoMuted": true,
@@ -44,26 +45,33 @@ class _MeetingScreenState extends State<MeetingScreen> {
       userInfo: JitsiMeetUserInfo(
           displayName: "Flutter user", email: "user@example.com"),
     );
-    jitsiMeet.join(options);
+    jitsiMeet.join(
+      options,
+    
+    );
+   
+   
   }
 
   // final JitsiMeetMethods _jitsiMeetMethods = JitsiMeetMethods();
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ButtonIcon(
-          onPressed: ()  {
+          onPressed: () {
+           
             
-            join();
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) {
-            //       return TeacherHomePage();
-            //     },
-            //   ),
-            // );
+            
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return StudentHomePage();
+                },
+              ),
+            );
           },
           icon: widget.icon,
           text: widget.text,

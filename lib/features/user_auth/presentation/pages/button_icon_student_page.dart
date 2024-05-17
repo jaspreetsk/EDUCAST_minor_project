@@ -35,7 +35,7 @@ class _ButtonIconStudentPageState extends State<ButtonIconStudentPage> {
   }
 
   List<Widget> pages = [
-     MeetingScreen(text: 'Join the meeting', icon: Icons.meeting_room,),
+    MeetingScreen(text: 'Join the meeting', icon: Icons.meeting_room,),
     const HistoryMeetingScreen(),
     const Text('Contacts'),
     const Text('Settings'),

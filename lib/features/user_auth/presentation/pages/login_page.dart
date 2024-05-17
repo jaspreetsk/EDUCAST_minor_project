@@ -1,6 +1,5 @@
 import 'package:educast/features/user_auth/presentation/button_icon_teacher_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-
 import 'package:educast/firebase_auth/auth.dart';
 import 'package:educast/firebase_auth/show_snack_bar.dart';
 import 'package:educast/features/user_auth/presentation/pages/button_icon_student_page.dart';
@@ -15,19 +14,46 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => LoginPageState();
 }
 
 class LoginPageState extends State<LoginPage> {
+  late DateTime? jitsiStartTime; // Initialize when the user joins the meeting
+  late DateTime? jitsiEndTime;
+  LoginPageState() {
+    jitsiStartTime = DateTime.now();
+    print(
+        '===========================jitsi start time==========================$jitsiStartTime');
+  }
+
   final FirebaseAnalytics analytics_instance = FirebaseAnalytics.instance;
 
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
 
   void loginUser() async {
+    jitsiEndTime = DateTime.now();
+    print(
+        '==========================jitsi end time============================$jitsiEndTime');
+    Duration jitsiTotalTime = jitsiEndTime!.difference(jitsiStartTime!);
+    print(
+        '===========================jitsi total time======================${jitsiTotalTime.inMinutes}');
+    await analytics_instance.logEvent(
+            name: 'Login_Time',
+            parameters: <String,dynamic>{
+              'time_spent': jitsiTotalTime.inMinutes,
+            },
+          );
+    await analytics_instance.logEvent(
+      name: 'JaspreetTime',
+      parameters: {
+        'KrishSpent': jitsiTotalTime.inMinutes,
+      },
+    );
+
     FirebaseAuthMethods().loginWithEmail(
         email: emailcontroller.text,
         password: passwordcontroller.text,
@@ -65,7 +91,6 @@ class LoginPageState extends State<LoginPage> {
 
     await FirebaseAnalytics.instance.setUserId(id: emailcontroller.text);
     //print('////////////////////////////////////////////${emailcontroller.text}');
-
   }
 
   // Checking if email exists in student collection
