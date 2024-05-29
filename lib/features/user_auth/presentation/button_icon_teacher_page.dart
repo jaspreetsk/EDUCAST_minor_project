@@ -1,9 +1,8 @@
 import 'package:educast/features/user_auth/presentation/pages/history_meeting_screen.dart';
 import 'package:educast/features/user_auth/presentation/pages/create_new_meeting_screen_teacher.dart';
-import 'package:educast/features/user_auth/presentation/pages/teacher_home_page.dart';
+
 import 'package:educast/pallet.dart';
-import 'package:educast/wigets/buttons_icons.dart';
-import 'package:educast/wigets/text_field.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -23,7 +22,7 @@ class _ButtonIconTeacherPageState extends State<ButtonIconTeacherPage> {
   }
 
 List<Widget> pages = [
-  MeetingScreen(icon: Icons.videocam, text: 'Create new meeting',),
+  const MeetingScreen(icon: Icons.videocam, text: 'Create new meeting',),
   const HistoryMeetingScreen(),
   const Text('Contacts'),
   const Text('Settings'),

@@ -46,9 +46,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if(state == AppLifecycleState.resumed){
       _resumedCount++;
       analytics_instance.logEvent(
-        name: 'App_resumed',
+        name: 'App_Resumed',
         parameters: {
-          'count': _resumedCount,
+          'count_app_resumed': _resumedCount,
         }
       );
     } else if(state == AppLifecycleState.paused) {
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       analytics_instance.logEvent(
         name: 'App_Paused',
         parameters: {
-          'count': _pausedCount,
+          'count_app_paused': _pausedCount,
         },
       );
     }
@@ -87,12 +87,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     return TeacherHomePage();
                   }
                 }
-                return HomePage();
+                return const HomePage();
               } else {
-                return HomePage();
+                return const HomePage();
               }
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

@@ -14,7 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => LoginPageState();
@@ -47,12 +47,12 @@ class LoginPageState extends State<LoginPage> {
               'time_spent': jitsiTotalTime.inMinutes,
             },
           );
-    await analytics_instance.logEvent(
-      name: 'JaspreetTime',
-      parameters: {
-        'KrishSpent': jitsiTotalTime.inMinutes,
-      },
-    );
+    // await analytics_instance.logEvent(
+    //   name: 'JaspreetTime',
+    //   parameters: {
+    //     'KrishSpent': jitsiTotalTime.inMinutes,
+    //   },
+    // );
 
     FirebaseAuthMethods().loginWithEmail(
         email: emailcontroller.text,
@@ -69,7 +69,7 @@ class LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return ButtonIconStudentPage();
+            return const ButtonIconStudentPage();
           },
         ),
       );
@@ -78,7 +78,7 @@ class LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return ButtonIconTeacherPage();
+            return const ButtonIconTeacherPage();
           },
         ),
       );
@@ -137,7 +137,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'LogIn',
       ),
       body: SingleChildScrollView(
@@ -150,7 +150,7 @@ class LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Email',
                 style: TextStyle(
                     fontSize: 18,

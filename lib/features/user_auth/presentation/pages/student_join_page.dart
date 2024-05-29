@@ -1,4 +1,4 @@
-import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
+
 import 'package:educast/pallet.dart';
 import 'package:educast/features/user_auth/presentation/pages/button_icon_student_page.dart';
 import 'package:educast/wigets/gradient_button.dart';
@@ -19,7 +19,7 @@ class StudentJoinPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: 450,
               ),
               color: Pallete.textcolor,
@@ -28,7 +28,7 @@ class StudentJoinPage extends StatelessWidget {
             Center(
               child: GradientButton(title: 'End', ontap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                  return ButtonIconStudentPage();
+                  return const ButtonIconStudentPage();
                 }));
               }),
             )

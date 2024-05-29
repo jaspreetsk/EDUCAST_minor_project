@@ -1,6 +1,5 @@
 import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/login_page.dart';
-import 'dart:math';
+
 import 'package:educast/features/user_auth/presentation/pages/teacher_join_page.dart';
 import 'package:educast/pallet.dart';
 // import 'package:educast/resources/jitsi_meet_methods.dart';
@@ -20,10 +19,10 @@ class TeacherHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Create Session'),
+      appBar: const CustomAppBar(title: 'Create Session'),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 50,
             left: 30,
             right: 30,
@@ -71,7 +70,7 @@ class TeacherHomePage extends StatelessWidget {
                       ontap: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return TeacherJoinPage();
+                          return const TeacherJoinPage();
                         }));
   })),
               const SizedBox(
@@ -85,7 +84,7 @@ class TeacherHomePage extends StatelessWidget {
                       await prefs.setBool('isLoggedIn', false);
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return HomePage();
+                        return const HomePage();
                       }));
                     }),
               )

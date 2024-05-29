@@ -1,9 +1,7 @@
 import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/login_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/student_join_page.dart';
 import 'package:educast/pallet.dart';
 import 'package:educast/wigets/app_bar.dart';
-import 'package:educast/features/user_auth/presentation/pages/button_icon_student_page.dart';
+
 import 'package:educast/wigets/gradient_button.dart';
 import 'package:educast/wigets/text_field.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -68,10 +66,10 @@ class StudentHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Meeting page'),
+      appBar: const CustomAppBar(title: 'Meeting page'),
       body: SingleChildScrollView(
         child: Padding(
-          padding:EdgeInsets.only(
+          padding:const EdgeInsets.only(
             top: 50,
             left: 30,
             right: 30,
@@ -107,7 +105,7 @@ class StudentHomePage extends StatelessWidget {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('isLoggedIn', false);
                   Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                    return HomePage();
+                    return const HomePage();
                   }));
                 }),
               )

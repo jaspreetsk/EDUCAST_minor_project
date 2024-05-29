@@ -1,6 +1,5 @@
 import 'package:educast/features/user_auth/presentation/pages/home_page.dart';
 import 'package:educast/features/user_auth/presentation/pages/student_home_page.dart';
-import 'package:educast/features/user_auth/presentation/pages/teacher_home_page.dart';
 // import 'package:educast/resources/jitsi_meet_methods.dart';
 import 'package:educast/wigets/buttons_icons.dart';
 import 'package:educast/wigets/gradient_button.dart';
@@ -12,7 +11,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 class MeetingScreen extends StatefulWidget {
   final String text;
   final IconData icon;
-  MeetingScreen({super.key, required this.text, required this.icon});
+  const MeetingScreen({super.key, required this.text, required this.icon});
 
   @override
   State<MeetingScreen> createState() => _MeetingScreenState();
@@ -76,7 +75,7 @@ class _MeetingScreenState extends State<MeetingScreen> {
           icon: widget.icon,
           text: widget.text,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Center(
           child: GradientButton(
               title: 'Logout',
@@ -85,7 +84,7 @@ class _MeetingScreenState extends State<MeetingScreen> {
                 await prefs.setBool('isLoggedIn', false);
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return HomePage();
+                  return const HomePage();
                 }));
               }),
         )
